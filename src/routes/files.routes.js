@@ -1,10 +1,10 @@
-const { Router } = require('express');
+const { Router } = require('express')
 
-const router = Router();
+const router = Router()
 
 /* Controllers */
-const { getFiles } = require('../controllers/files.controller');
+const { getFiles } = require('../controllers/files.controller')
 
-router.get('/data', getFiles);
+router.get('/data', getFiles)
 
-module.exports = router;
+module.exports = router

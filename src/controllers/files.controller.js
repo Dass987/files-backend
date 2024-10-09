@@ -1,17 +1,17 @@
-const { getFormattedFiles } = require('../services/files.service');
+const { getFormattedFiles } = require('../services/files.service')
 
 const getFiles = async (req, res, next) => {
   try {
-    const { fileName } = req.query;
+    const { fileName } = req.query
 
-    const files = await getFormattedFiles(fileName);
+    const files = await getFormattedFiles(fileName)
 
-    return res.json({ files });
+    return res.json({ files })
   } catch (error) {
-    return next(error);
+    return next(error)
   }
-};
+}
 
 module.exports = {
-  getFiles,
-};
+  getFiles
+}
