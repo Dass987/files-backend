@@ -48,55 +48,6 @@ app.use((req, res, next) => {
   }
 });
 
-app.use((_req, res, next) => {
-  try {
-    /* Express interceptor */
-    const oldJson = res.json;
-    const response = {
-      version,
-      token: '',
-      message: '',
-      data: {},
-      errors: [],
-    };
-
-    res.json = function (data) {
-      let status = 200;
-
-      if (data.message) {
-        response.message = data.message;
-      }
-
-      if (res.locals.token) {
-        response.token = res.locals.token;
-      }
-
-      if (data.data) {
-        response.data = data.data;
-      }
-
-      if (data.errors) {
-        response.errors = Array.isArray(data.errors) ? data.errors : [data.errors];
-      }
-
-      res.json = oldJson;
-
-      if (status && status !== 200) {
-        return res.status(status).json(response);
-      }
-
-      if (data.message === 'PM-SAVED') return res.json(data.data);
-
-      return res.json(response);
-    };
-
-    return next();
-  } catch (error) {
-    console.log(error);
-    return next(error);
-  }
-});
-
 // ** Routes
 initRoutes(app);
 
