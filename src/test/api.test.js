@@ -58,7 +58,6 @@ describe('GET /api/files/data', () => {
       })
   })
 
-  // Prueba para verificar que al menos un archivo tenga líneas
   it('at least one file should have lines', () => {
     return chai
       .request(app)

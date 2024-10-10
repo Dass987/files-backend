@@ -9,7 +9,7 @@ const app = require('./src/app')
 const { name, version } = require('./package.json')
 const logger = require('./src/utils/logger')
 
-const PORT = 3000
+const PORT = 4250
 
 const server = http.createServer(app)
 

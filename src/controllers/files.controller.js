@@ -1,4 +1,4 @@
-const { getFormattedFiles } = require('../services/files.service')
+const { getFormattedFiles, getFilesFromRemoteApi } = require('../services/files.service')
 
 const getFiles = async (req, res, next) => {
   try {
@@ -12,6 +12,17 @@ const getFiles = async (req, res, next) => {
   }
 }
 
+const getFilesRaw = async (_req, res, next) => {
+  try {
+    const files = await getFilesFromRemoteApi()
+
+    return res.json({ files })
+  } catch (error) {
+    return next(error)
+  }
+}
+
 module.exports = {
-  getFiles
+  getFiles,
+  getFilesRaw
 }

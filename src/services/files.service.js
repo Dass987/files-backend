@@ -1,9 +1,14 @@
 const axios = require('../utils/axios')
 
+const getFilesFromRemoteApi = async () => {
+  const response = await axios.get('/secret/files')
+  const { files } = response.data
+  return files
+}
+
 const getFormattedFiles = async (fileName = '') => {
   try {
-    const response = await axios.get('/secret/files')
-    const { files } = response.data
+    const files = await getFilesFromRemoteApi()
 
     let result = await Promise.all(files.map(file => getFileByNameFromRemoteAPI(file)))
 
@@ -31,13 +36,6 @@ const getFileByNameFromRemoteAPI = async fileName => {
     // result.lines = error.response.data;
     return result
   }
-}
-
-const formatFileContent = (fileContent = '') => {
-  if (!fileContent) return ''
-  const newFileContent = ''
-
-  return newFileContent
 }
 
 function formatContent (fileContent, fileName) {
@@ -70,4 +68,4 @@ function formatContent (fileContent, fileName) {
   return result
 }
 
-module.exports = { getFormattedFiles, formatFileContent, getFileByNameFromRemoteAPI }
+module.exports = { getFormattedFiles, getFileByNameFromRemoteAPI, getFilesFromRemoteApi }
